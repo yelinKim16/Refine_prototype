@@ -17,21 +17,18 @@ import routerBindings, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
+import { MealHistoryList, MealHistoryShow } from "pages/mealHistories";
 import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "pages/categories";
+  MealUsersCreate,
+  MealUsersEdit,
+  MealUsersShow,
+  MealUsersList,
+} from "pages/mealUsers";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
+import { mealHistoriesProvider } from "components/mock/mockProvider";
+import { usersProvider } from "components/mock/usersProvider";
 
 function App() {
   return (
@@ -44,27 +41,29 @@ function App() {
           <RefineSnackbarProvider>
             <DevtoolsProvider>
               <Refine
-                dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+                dataProvider={{
+                  default: mealHistoriesProvider,
+                  userData: usersProvider,
+                }}
                 notificationProvider={notificationProvider}
                 routerProvider={routerBindings}
                 resources={[
                   {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
+                    name: "mealHistories",
+                    list: "/mealHistories",
+                    show: "/mealHistories/show/:id",
                     meta: {
                       canDelete: true,
                     },
                   },
                   {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
+                    name: "mealUsers",
+                    list: "/mealUsers",
+                    create: "/mealUsers/create",
+                    edit: "/mealUsers/edit/:id",
+                    show: "/mealUsers/show/:id",
                     meta: {
+                      dataProviderName: "userData",
                       canDelete: true,
                     },
                   },
@@ -86,19 +85,17 @@ function App() {
                   >
                     <Route
                       index
-                      element={<NavigateToResource resource="blog_posts" />}
+                      element={<NavigateToResource resource="mealHistories" />}
                     />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
+                    <Route path="/mealHistories">
+                      <Route index element={<MealHistoryList />} />
+                      <Route path="show/:id" element={<MealHistoryShow />} />
                     </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
+                    <Route path="/mealUsers">
+                      <Route index element={<MealUsersList />} />
+                      <Route path="create" element={<MealUsersCreate />} />
+                      <Route path="edit/:id" element={<MealUsersEdit />} />
+                      <Route path="show/:id" element={<MealUsersShow />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
