@@ -1,14 +1,20 @@
-import DarkModeOutlined from "@mui/icons-material/DarkModeOutlined";
-import LightModeOutlined from "@mui/icons-material/LightModeOutlined";
-import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { useGetIdentity } from "@refinedev/core";
+import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
+import {
+  AppBar,
+  Avatar,
+  FormControl,
+  IconButton,
+  MenuItem,
+  Select,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import { useGetIdentity, useGetLocale, useSetLocale } from "@refinedev/core";
 import { HamburgerMenu, RefineThemedLayoutV2HeaderProps } from "@refinedev/mui";
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
+
 import { ColorModeContext } from "../../contexts/color-mode";
 
 type IUser = {
@@ -17,61 +23,89 @@ type IUser = {
   avatar: string;
 };
 
-export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
-  isSticky = true,
-}) => {
+export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = () => {
+  const { t, i18n } = useTranslation();
+  const locale = useGetLocale();
+  const changeLanguage = useSetLocale();
+
+  const currentLocale = locale();
   const { mode, setMode } = useContext(ColorModeContext);
 
   const { data: user } = useGetIdentity<IUser>();
-
   return (
-    <AppBar position={isSticky ? "sticky" : "relative"}>
+    <AppBar position="sticky">
       <Toolbar>
         <Stack
           direction="row"
           width="100%"
-          justifyContent="flex-end"
+          justifyContent="space-between"
           alignItems="center"
         >
           <HamburgerMenu />
+
           <Stack
             direction="row"
             width="100%"
             justifyContent="flex-end"
             alignItems="center"
           >
-            <IconButton
-              color="inherit"
-              onClick={() => {
-                setMode();
-              }}
-            >
-              {mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
-            </IconButton>
-
-            {(user?.avatar || user?.name) && (
+            <Stack direction="row" alignItems="center">
+              <IconButton
+                color="inherit"
+                onClick={() => {
+                  setMode();
+                }}
+              >
+                {mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
+              </IconButton>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <Select
+                  disableUnderline
+                  value={currentLocale || ""}
+                  inputProps={{ "aria-label": "Without label" }}
+                  variant="standard"
+                >
+                  {[...(i18n.languages ?? [])].sort().map((lang: string) => (
+                    <MenuItem
+                      key={lang}
+                      selected={currentLocale === lang}
+                      defaultValue={lang || ""}
+                      onClick={() => {
+                        changeLanguage(lang);
+                      }}
+                      value={lang || ""}
+                    >
+                      <Stack
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="center"
+                      >
+                        <Avatar
+                          sx={{
+                            width: "16px",
+                            height: "16px",
+                            marginRight: "5px",
+                          }}
+                          src={`/images/flags/${lang}.svg`}
+                        />
+                        <Typography>{t(`language.${lang}`)}</Typography>
+                      </Stack>
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               <Stack
                 direction="row"
-                gap="16px"
+                gap="4px"
                 alignItems="center"
                 justifyContent="center"
               >
                 {user?.name && (
-                  <Typography
-                    sx={{
-                      display: {
-                        xs: "none",
-                        sm: "inline-block",
-                      },
-                    }}
-                    variant="subtitle2"
-                  >
-                    {user?.name}
-                  </Typography>
+                  <Typography variant="subtitle2">{user?.name}</Typography>
                 )}
                 <Avatar src={user?.avatar} alt={user?.name} />
               </Stack>
-            )}
+            </Stack>
           </Stack>
         </Stack>
       </Toolbar>

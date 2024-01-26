@@ -1,7 +1,8 @@
 import { GitHubBanner, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-
+import type { I18nProvider } from "@refinedev/core";
+import { useTranslation } from "react-i18next";
 import {
   ErrorComponent,
   notificationProvider,
@@ -31,6 +32,14 @@ import { mealHistoriesProvider } from "components/mock/mockProvider";
 import { usersProvider } from "components/mock/usersProvider";
 
 function App() {
+  //const { t, i18n } = useTranslation();
+
+  // const i18nProvider = {
+  //   translate: (key: string, params: object) => t(key, params),
+  //   changeLocale: (lang: string) => i18n.changeLanguage(lang),
+  //   getLocale: () => i18n.language,
+  // };
+
   return (
     <BrowserRouter>
       <GitHubBanner />
@@ -45,6 +54,7 @@ function App() {
                   default: mealHistoriesProvider,
                   userData: usersProvider,
                 }}
+                //   i18nProvider={i18nProvider}
                 notificationProvider={notificationProvider}
                 routerProvider={routerBindings}
                 resources={[

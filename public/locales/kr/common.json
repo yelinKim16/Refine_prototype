@@ -1,0 +1,27 @@
+{
+  "language": {
+    "kr": "한국어",
+    "en": "영문"
+  },
+  "buttons": {
+    "edit": "편집",
+    "create": "생성",
+    "save": "저장"
+  },
+  "mealHistories": {
+    "mealHistories": "식수이력",
+    "titles": {
+      "list": "식수이력",
+      "show": "식수이력 정보"
+    }
+  },
+  "mealUsers": {
+    "mealUsers": "식수 사용자",
+    "titles": {
+      "list": "사용자",
+      "create": "사용자 생성",
+      "edit": "사용자 편집",
+      "show": "사용자 정보"
+    }
+  }
+}

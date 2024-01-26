@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 import { useTranslate } from "@refinedev/core";
 import { IMealUser } from "interfaces";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -9,6 +9,7 @@ import {
   ShowButton,
   useDataGrid,
   DeleteButton,
+  TagField,
 } from "@refinedev/mui";
 export const MealUsersList: React.FC = () => {
   const t = useTranslate(); // 다국어 지원
@@ -36,6 +37,18 @@ export const MealUsersList: React.FC = () => {
         field: "empType",
         headerName: "EmpType",
         width: 100,
+        renderCell: function render({ row }) {
+          let color: ComponentProps<typeof TagField>["color"];
+          switch (row.empType) {
+            case "임직원":
+              color = "success";
+              break;
+            case "방문자":
+              color = "info";
+              break;
+          }
+          return <TagField value={row.empType} color={color} />;
+        },
       },
       {
         field: "companyNm",

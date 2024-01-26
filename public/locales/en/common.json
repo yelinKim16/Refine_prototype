@@ -1,0 +1,27 @@
+{
+  "language": {
+    "kr": "Korean",
+    "en": "English"
+  },
+  "buttons": {
+    "edit": "Edit",
+    "create": "Create",
+    "save": "Save"
+  },
+  "mealHistories": {
+    "mealHistories": "MealHistories",
+    "titles": {
+      "list": "MealHistories",
+      "show": "MealHistories Info"
+    }
+  },
+  "mealUsers": {
+    "mealUsers": "MealUsers",
+    "titles": {
+      "list": "MealUsers",
+      "create": "MealUsers Create",
+      "edit": "MealUsers Edit",
+      "show": "MealUsers Info"
+    }
+  }
+}
