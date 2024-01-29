@@ -6,7 +6,8 @@
   "buttons": {
     "edit": "편집",
     "create": "생성",
-    "save": "저장"
+    "save": "저장",
+    "search": "검색"
   },
   "mealHistories": {
     "mealHistories": "식수이력",

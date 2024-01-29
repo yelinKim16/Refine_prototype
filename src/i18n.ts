@@ -16,5 +16,3 @@ i18n
     defaultNS: "common",
     fallbackLng: ["kr", "en"],
   });
-
-export default i18n;

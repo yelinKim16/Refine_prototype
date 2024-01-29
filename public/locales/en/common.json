@@ -6,7 +6,8 @@
   "buttons": {
     "edit": "Edit",
     "create": "Create",
-    "save": "Save"
+    "save": "Save",
+    "search": " Search"
   },
   "mealHistories": {
     "mealHistories": "MealHistories",

@@ -1,7 +1,6 @@
 import { GitHubBanner, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import type { I18nProvider } from "@refinedev/core";
 import { useTranslation } from "react-i18next";
 import {
   ErrorComponent,
@@ -17,7 +16,7 @@ import routerBindings, {
   NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
-import dataProvider from "@refinedev/simple-rest";
+// import dataProvider from "@refinedev/simple-rest";
 import { MealHistoryList, MealHistoryShow } from "pages/mealHistories";
 import {
   MealUsersCreate,
@@ -30,15 +29,17 @@ import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { mealHistoriesProvider } from "components/mock/mockProvider";
 import { usersProvider } from "components/mock/usersProvider";
+import "./i18n";
 
 function App() {
-  //const { t, i18n } = useTranslation();
-
-  // const i18nProvider = {
-  //   translate: (key: string, params: object) => t(key, params),
-  //   changeLocale: (lang: string) => i18n.changeLanguage(lang),
-  //   getLocale: () => i18n.language,
-  // };
+  // npm i react-i18next i18next i18next-http-backend i18next-browser-languagedetector
+  // npm install react-i18next i18next --save
+  const { t, i18n } = useTranslation();
+  const i18nProvider = {
+    translate: (key: string, params: object) => t(key, params),
+    changeLocale: (lang: string) => i18n.changeLanguage(lang),
+    getLocale: () => i18n.language,
+  };
 
   return (
     <BrowserRouter>
@@ -54,7 +55,7 @@ function App() {
                   default: mealHistoriesProvider,
                   userData: usersProvider,
                 }}
-                //   i18nProvider={i18nProvider}
+                i18nProvider={i18nProvider}
                 notificationProvider={notificationProvider}
                 routerProvider={routerBindings}
                 resources={[
@@ -88,7 +89,7 @@ function App() {
                 <Routes>
                   <Route
                     element={
-                      <ThemedLayoutV2 Header={() => <Header isSticky={true} />}>
+                      <ThemedLayoutV2 Header={() => <Header />}>
                         <Outlet />
                       </ThemedLayoutV2>
                     }

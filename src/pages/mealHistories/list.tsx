@@ -10,6 +10,7 @@ import {
   useMany,
   CrudFilters,
   getDefaultFilter,
+  useTranslate,
 } from "@refinedev/core";
 import {
   DateField,
@@ -34,7 +35,7 @@ import {
 } from "interfaces";
 
 export const MealHistoryList: React.FC = () => {
-  //const t = useTranslate(); // 다국어 지원
+  const t = useTranslate(); // 다국어 지원
   const { dataGridProps, filters, search } = useDataGrid<
     IMealHistory,
     HttpError,
@@ -72,7 +73,7 @@ export const MealHistoryList: React.FC = () => {
     () => [
       {
         field: "mealDt",
-        headerName: "MealDt",
+        headerName: t("MealDt"),
         width: 180,
         renderCell: function render({ value }) {
           return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
@@ -80,17 +81,17 @@ export const MealHistoryList: React.FC = () => {
       },
       {
         field: "empNo",
-        headerName: "EmpNo",
+        headerName: t("EmpNo"),
         minWidth: 100,
       },
       {
         field: "empNm",
-        headerName: "EmpNm",
+        headerName: t("EmpNm"),
         width: 100,
       },
       {
         field: "empType",
-        headerName: "EmpType",
+        headerName: t("EmpType"),
         width: 100,
         renderCell: function render({ row }) {
           let color: ComponentProps<typeof TagField>["color"];
@@ -107,28 +108,28 @@ export const MealHistoryList: React.FC = () => {
       },
       {
         field: "companyNm",
-        headerName: "CompanyNm",
+        headerName: t("CompanyNm"),
         width: 120,
       },
       {
         field: "departmentNm",
-        headerName: "DepartmentNm",
+        headerName: t("DepartmentNm"),
         width: 120,
       },
       {
         field: "positionNm",
-        headerName: "PositionNm",
+        headerName: t("PositionNm"),
         width: 120,
       },
       {
         field: "mealType",
-        headerName: "MealType",
+        headerName: t("MealType"),
         width: 100,
       },
 
       {
         field: "actions",
-        headerName: "Show",
+        headerName: t("Show"),
         sortable: false,
         renderCell: function render({ row }) {
           return (
@@ -142,7 +143,7 @@ export const MealHistoryList: React.FC = () => {
         minWidth: 80,
       },
     ],
-    [mealHistoriesData, isLoading]
+    [t]
   );
   //검색기능
   const { control, handleSubmit } = useForm<
