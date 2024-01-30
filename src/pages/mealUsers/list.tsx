@@ -25,17 +25,17 @@ export const MealUsersList: React.FC = () => {
     () => [
       {
         field: "empNo",
-        headerName: "EmpNo",
+        headerName: t("mealUsers.fields.empNo"),
         minWidth: 100,
       },
       {
         field: "empNm",
-        headerName: "EmpNm",
+        headerName: t("mealUsers.fields.empNm"),
         width: 100,
       },
       {
         field: "empType",
-        headerName: "EmpType",
+        headerName: t("mealUsers.fields.empType"),
         width: 100,
         renderCell: function render({ row }) {
           let color: ComponentProps<typeof TagField>["color"];
@@ -52,22 +52,22 @@ export const MealUsersList: React.FC = () => {
       },
       {
         field: "companyNm",
-        headerName: "CompanyNm",
+        headerName: t("mealUsers.fields.companyNm"),
         width: 110,
       },
       {
         field: "departmentNm",
-        headerName: "DepartmentNm",
+        headerName: t("mealUsers.fields.departmentNm"),
         width: 120,
       },
       {
         field: "positionNm",
-        headerName: "PositionNm",
+        headerName: t("mealUsers.fields.positionNm"),
         width: 100,
       },
       {
         field: "createDt",
-        headerName: "CreateDt",
+        headerName: t("mealUsers.fields.createDt"),
         width: 160,
         renderCell: function render({ value }) {
           return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
@@ -75,7 +75,7 @@ export const MealUsersList: React.FC = () => {
       },
       {
         field: "modifyDt",
-        headerName: "ModifyDt",
+        headerName: t("mealUsers.fields.modifyDt"),
         width: 160,
         renderCell: function render({ value }) {
           return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;

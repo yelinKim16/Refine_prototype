@@ -2,10 +2,11 @@ import { Show } from "@refinedev/mui";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useForm } from "@refinedev/react-hook-form";
-import { useShow } from "@refinedev/core";
+import { useShow, useTranslate } from "@refinedev/core";
 import { IMealUser } from "interfaces";
 
 export const MealUsersShow: React.FC = () => {
+  const t = useTranslate();
   const { queryResult } = useShow<IMealUser>();
   const { isLoading } = queryResult;
   const {
@@ -27,7 +28,7 @@ export const MealUsersShow: React.FC = () => {
           error={!!errors.name}
           margin="normal"
           fullWidth
-          label="EmpNo"
+          label={t("mealUsers.fields.empNo")}
           name="empNo"
           disabled={true}
           autoFocus
@@ -40,7 +41,7 @@ export const MealUsersShow: React.FC = () => {
           error={!!errors.material}
           margin="normal"
           fullWidth
-          label="EmpNm"
+          label={t("mealUsers.fields.empNm")}
           name="empNm"
           disabled={true}
         />
@@ -51,7 +52,7 @@ export const MealUsersShow: React.FC = () => {
           })}
           error={!!errors.description}
           margin="normal"
-          label="EmpType"
+          label={t("mealUsers.fields.empType")}
           name="empType"
           disabled={true}
           multiline
@@ -64,7 +65,7 @@ export const MealUsersShow: React.FC = () => {
           error={!!errors.price}
           margin="normal"
           fullWidth
-          label="CompanyNm"
+          label={t("mealUsers.fields.companyNm")}
           name="companyNm"
           disabled={true}
         />
@@ -75,7 +76,7 @@ export const MealUsersShow: React.FC = () => {
           })}
           error={!!errors.description}
           margin="normal"
-          label="DepartmentNm"
+          label={t("mealUsers.fields.departmentNm")}
           name="departmentNm"
           multiline
           disabled={true}
@@ -88,7 +89,7 @@ export const MealUsersShow: React.FC = () => {
           error={!!errors.price}
           margin="normal"
           fullWidth
-          label="PositionNm"
+          label={t("mealUsers.fields.positionNm")}
           name="positionNm"
           disabled={true}
         />
@@ -100,7 +101,7 @@ export const MealUsersShow: React.FC = () => {
           error={!!errors.price}
           margin="normal"
           fullWidth
-          label="CreateDt"
+          label={t("mealUsers.fields.createDt")}
           name="createDt"
           disabled={true}
         />
@@ -112,7 +113,7 @@ export const MealUsersShow: React.FC = () => {
           error={!!errors.price}
           margin="normal"
           fullWidth
-          label="ModifyDt"
+          label={t("mealUsers.fields.modifyDt")}
           name="modifyDt"
           disabled={true}
         />

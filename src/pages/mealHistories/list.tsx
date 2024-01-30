@@ -73,7 +73,7 @@ export const MealHistoryList: React.FC = () => {
     () => [
       {
         field: "mealDt",
-        headerName: t("MealDt"),
+        headerName: t("mealHistories.fields.mealDt"),
         width: 180,
         renderCell: function render({ value }) {
           return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
@@ -81,17 +81,17 @@ export const MealHistoryList: React.FC = () => {
       },
       {
         field: "empNo",
-        headerName: t("EmpNo"),
+        headerName: t("mealHistories.fields.empNo"),
         minWidth: 100,
       },
       {
         field: "empNm",
-        headerName: t("EmpNm"),
+        headerName: t("mealHistories.fields.empNm"),
         width: 100,
       },
       {
         field: "empType",
-        headerName: t("EmpType"),
+        headerName: t("mealHistories.fields.empType"),
         width: 100,
         renderCell: function render({ row }) {
           let color: ComponentProps<typeof TagField>["color"];
@@ -108,28 +108,28 @@ export const MealHistoryList: React.FC = () => {
       },
       {
         field: "companyNm",
-        headerName: t("CompanyNm"),
+        headerName: t("mealHistories.fields.companyNm"),
         width: 120,
       },
       {
         field: "departmentNm",
-        headerName: t("DepartmentNm"),
+        headerName: t("mealHistories.fields.departmentNm"),
         width: 120,
       },
       {
         field: "positionNm",
-        headerName: t("PositionNm"),
+        headerName: t("mealHistories.fields.positionNm"),
         width: 120,
       },
       {
         field: "mealType",
-        headerName: t("MealType"),
+        headerName: t("mealHistories.fields.mealType"),
         width: 100,
       },
 
       {
         field: "actions",
-        headerName: t("Show"),
+        headerName: t("mealHistories.fields.show"),
         sortable: false,
         renderCell: function render({ row }) {
           return (
@@ -201,7 +201,7 @@ export const MealHistoryList: React.FC = () => {
                 variant="contained"
                 sx={{ height: 38, width: 90, ml: 1, mt: 1 }}
               >
-                Search
+                {t("buttons.search")}
               </Button>
             </Box>
           </CardContent>
@@ -210,7 +210,9 @@ export const MealHistoryList: React.FC = () => {
       <Grid item xs={12} lg={12}>
         <List
           headerButtons={
-            <ExportButton onClick={triggerExport} loading={exportLoading} />
+            <ExportButton onClick={triggerExport} loading={exportLoading}>
+              {t("buttons.excelExport")}
+            </ExportButton>
           }
         >
           <DataGrid

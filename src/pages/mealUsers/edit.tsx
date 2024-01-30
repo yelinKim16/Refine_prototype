@@ -5,8 +5,10 @@ import { useForm } from "@refinedev/react-hook-form";
 
 import { IMealUser } from "interfaces";
 import { useDataGrid } from "@refinedev/mui";
+import { useTranslate } from "@refinedev/core";
 
 export const MealUsersEdit: React.FC = () => {
+  const t = useTranslate();
   const { dataGridProps } = useDataGrid<IMealUser>();
   const {
     saveButtonProps,
@@ -31,7 +33,7 @@ export const MealUsersEdit: React.FC = () => {
           error={!!errors.name}
           margin="normal"
           fullWidth
-          label="EmpNo"
+          label={t("mealUsers.fields.empNo")}
           name="empNo"
           autoFocus
         />
@@ -43,7 +45,7 @@ export const MealUsersEdit: React.FC = () => {
           error={!!errors.material}
           margin="normal"
           fullWidth
-          label="EmpNm"
+          label={t("mealUsers.fields.empNm")}
           name="empNm"
           autoFocus
         />
@@ -54,7 +56,7 @@ export const MealUsersEdit: React.FC = () => {
           })}
           error={!!errors.description}
           margin="normal"
-          label="EmpType"
+          label={t("mealUsers.fields.empType")}
           name="empType"
           multiline
         />
@@ -66,7 +68,7 @@ export const MealUsersEdit: React.FC = () => {
           error={!!errors.price}
           margin="normal"
           fullWidth
-          label="CompanyNm"
+          label={t("mealUsers.fields.companyNm")}
           name="companyNm"
           autoFocus
         />
@@ -77,7 +79,7 @@ export const MealUsersEdit: React.FC = () => {
           })}
           error={!!errors.description}
           margin="normal"
-          label="DepartmentNm"
+          label={t("mealUsers.fields.departmentNm")}
           name="departmentNm"
           multiline
         />
@@ -89,7 +91,7 @@ export const MealUsersEdit: React.FC = () => {
           error={!!errors.price}
           margin="normal"
           fullWidth
-          label="PositionNm"
+          label={t("mealUsers.fields.positionNm")}
           name="positionNm"
           autoFocus
         />

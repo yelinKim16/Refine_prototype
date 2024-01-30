@@ -3,21 +3,52 @@
     "kr": "Korean",
     "en": "English"
   },
+  "actions": {
+    "list": "List",
+    "create": "Create",
+    "edit": "Edit",
+    "show": "Show"
+  },
   "buttons": {
     "edit": "Edit",
     "create": "Create",
     "save": "Save",
-    "search": " Search"
+    "filter": "Search",
+    "cancel": "Cancel",
+    "refresh": "Refresh",
+    "search": "Search",
+    "excelExport": "Export"
   },
   "mealHistories": {
     "mealHistories": "MealHistories",
+    "fields": {
+      "mealDt": "MealDt",
+      "empNo": "EmpNo",
+      "empNm": "EmpNm",
+      "empType": "EmpType",
+      "companyNm": "CompanyNm",
+      "departmentNm": "DepartmentNm",
+      "positionNm": "PositionNm",
+      "mealType": "MealType",
+      "show": "Show"
+    },
     "titles": {
       "list": "MealHistories",
-      "show": "MealHistories Info"
+      "show": "Show"
     }
   },
   "mealUsers": {
     "mealUsers": "MealUsers",
+    "fields": {
+      "empNo": "EmpNp",
+      "empNm": "EmpNm",
+      "empType": "EmpType",
+      "companyNm": "CompanyNm",
+      "departmentNm": "DepartmentNm",
+      "positionNm": "PositionNm",
+      "createDt": "CreateDt",
+      "modifyDt": "ModifyDt"
+    },
     "titles": {
       "list": "MealUsers",
       "create": "MealUsers Create",
