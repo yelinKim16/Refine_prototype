@@ -30,6 +30,8 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { mealHistoriesProvider } from "components/mock/mockProvider";
 import { usersProvider } from "components/mock/usersProvider";
 import "./i18n";
+import dataProvider, { axiosInstance } from "@refinedev/simple-rest";
+import { apiProvider } from "components/provider/apiProvider";
 
 function App() {
   // npm i react-i18next i18next i18next-http-backend i18next-browser-languagedetector
@@ -53,7 +55,9 @@ function App() {
               <Refine
                 dataProvider={{
                   default: mealHistoriesProvider,
+                  // default: dataProvider("/api"),
                   userData: usersProvider,
+                  // api: apiProvider("/api", axiosInstance),
                 }}
                 i18nProvider={i18nProvider}
                 notificationProvider={notificationProvider}
