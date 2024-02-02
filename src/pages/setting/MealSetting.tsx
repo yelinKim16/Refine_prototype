@@ -4,8 +4,9 @@ import { Box } from "@mui/material";
 import * as React from "react";
 import { ISetting } from "interfaces";
 import { useForm } from "@refinedev/react-hook-form";
-
 import TextField from "@mui/material/TextField";
+import { mockSetting } from "components/mock/mockSetting";
+import { Breakfast } from "./mealTimeControl/Breakfast";
 
 export const MealSetting: React.FC = (props) => {
   const {
@@ -21,6 +22,10 @@ export const MealSetting: React.FC = (props) => {
   });
   const settings = productQueryResult?.data?.data;
 
+  const data = mockSetting;
+  const breakfastST = data?.find((item) => item.name === "breakfastStartTime");
+  const breakfastET = data?.find((item) => item.name === "breakfastEndTime");
+
   return (
     <form onSubmit={handleSubmit(onFinish)}>
       <Card>
@@ -31,51 +36,8 @@ export const MealSetting: React.FC = (props) => {
             </Typography>
           </Box>
           <Divider />
-
-          <Box>
-            <Box
-              sx={{
-                alignItems: "flex-end",
-                display: "flex",
-                flexWrap: "wrap",
-                m: 3,
-              }}
-            >
-              <Typography
-                sx={{
-                  mb: 3,
-                  mr: 3,
-                  fontWeight: "fontWeightBold",
-                  color: "text.secondary",
-                }}
-              >
-                조식
-              </Typography>
-              <Box
-                sx={{
-                  alignItems: "flex-end",
-                  display: "flex",
-                  flexWrap: "wrap",
-                }}
-              >
-                <TextField
-                  id="start_time"
-                  {...register("time", { required: true })}
-                  label="시작시간"
-                  type="time"
-                  margin="normal"
-                />
-                <Typography sx={{ mb: 3, mr: 3, ml: 3 }}>~</Typography>
-                <TextField
-                  id="end_time"
-                  // {...register("time", { required: "This field is required" })}
-                  label="종료시간"
-                  type="time"
-                  margin="normal"
-                />
-              </Box>
-            </Box>
-          </Box>
+          <Breakfast />
+          <Box></Box>
         </CardContent>
         <Divider />
         <Box

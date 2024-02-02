@@ -6,6 +6,7 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 import MealSetting from "./MealSetting";
+import BaseInfo from "./BaseInfo";
 export const Setting: React.FC = () => {
   //Tab
   const [value, setValue] = React.useState("base_info");
@@ -26,7 +27,9 @@ export const Setting: React.FC = () => {
             />
           </TabList>
         </Box>
-        <TabPanel value="base_info"></TabPanel>
+        <TabPanel value="base_info">
+          <BaseInfo />
+        </TabPanel>
         <TabPanel value="meal_type">
           <MealSetting />
         </TabPanel>
