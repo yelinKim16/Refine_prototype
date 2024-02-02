@@ -1,9 +1,11 @@
 import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
+import SettingsIcon from "@mui/icons-material/Settings";
 import {
   AppBar,
   Avatar,
   FormControl,
   IconButton,
+  ListItemIcon,
   MenuItem,
   Select,
   Stack,
@@ -14,9 +16,9 @@ import { useGetIdentity, useGetLocale, useSetLocale } from "@refinedev/core";
 import { HamburgerMenu, RefineThemedLayoutV2HeaderProps } from "@refinedev/mui";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-
+import { useLocation, useNavigate } from "react-router-dom";
 import { ColorModeContext } from "../../contexts/color-mode";
-
+import { useEffect, useState } from "react";
 type IUser = {
   id: number;
   name: string;
@@ -24,6 +26,23 @@ type IUser = {
 };
 
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = () => {
+  //route
+  const location = useLocation();
+  const route = location.pathname.split("/").slice(2);
+  const [openAuthMenu, setOpenAuthMenu] = useState(false);
+  const handleCloseAuthMenu = () => setOpenAuthMenu(false);
+
+  const navigate = useNavigate();
+  const handlePreferences = () => {
+    handleCloseAuthMenu(); // 화면 닫기
+    navigate("/setting");
+  };
+  const handleRouteHome = () => {
+    handleCloseAuthMenu();
+    navigate("/mealHistories");
+  };
+
+  //한영 변환
   const { t, i18n } = useTranslation();
   const locale = useGetLocale();
   const changeLanguage = useSetLocale();
@@ -50,6 +69,13 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = () => {
             alignItems="center"
           >
             <Stack direction="row" alignItems="center">
+              {/* Setting 설정 */}
+              {location.pathname.match("/setting/*") ? (
+                <MenuItem onClick={handleRouteHome}>Home</MenuItem>
+              ) : (
+                <MenuItem onClick={handlePreferences}>관리자메뉴</MenuItem>
+              )}
+              <SettingsIcon sx={{ mr: 2 }} />
               <IconButton
                 color="inherit"
                 onClick={() => {

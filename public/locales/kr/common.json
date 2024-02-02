@@ -19,7 +19,8 @@
     "cancel": "취소",
     "refresh": "새로고침",
     "search": "검색",
-    "excelExport": "다운로드"
+    "excelExport": "다운로드",
+    "delete": "삭제"
   },
   "mealHistories": {
     "mealHistories": "식수이력",

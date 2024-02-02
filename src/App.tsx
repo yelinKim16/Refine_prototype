@@ -29,9 +29,11 @@ import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { mealHistoriesProvider } from "components/mock/mockProvider";
 import { usersProvider } from "components/mock/usersProvider";
+import { settingProvider } from "components/mock/settingProvider";
 import "./i18n";
-import dataProvider, { axiosInstance } from "@refinedev/simple-rest";
-import { apiProvider } from "components/provider/apiProvider";
+// import dataProvider, { axiosInstance } from "@refinedev/simple-rest";
+// import { apiProvider } from "components/provider/apiProvider";
+import { Setting } from "pages/setting";
 
 function App() {
   // npm i react-i18next i18next i18next-http-backend i18next-browser-languagedetector
@@ -57,6 +59,7 @@ function App() {
                   default: mealHistoriesProvider,
                   // default: dataProvider("/api"),
                   userData: usersProvider,
+                  settingData: settingProvider,
                   // api: apiProvider("/api", axiosInstance),
                 }}
                 i18nProvider={i18nProvider}
@@ -80,6 +83,16 @@ function App() {
                     meta: {
                       dataProviderName: "userData",
                       canDelete: true,
+                    },
+                  },
+                  {
+                    name: "setting",
+                    list: "/setting",
+                    // create: "/setting/create",
+                    // edit: "/setting/edit/:id",
+                    // show: "/setting/breakfast",
+                    meta: {
+                      dataProviderName: "settingData",
                     },
                   },
                 ]}
@@ -111,6 +124,9 @@ function App() {
                       <Route path="create" element={<MealUsersCreate />} />
                       <Route path="edit/:id" element={<MealUsersEdit />} />
                       <Route path="show/:id" element={<MealUsersShow />} />
+                    </Route>
+                    <Route path="/setting">
+                      <Route index element={<Setting />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>

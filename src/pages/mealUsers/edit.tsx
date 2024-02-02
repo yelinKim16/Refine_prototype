@@ -9,12 +9,10 @@ import { useTranslate } from "@refinedev/core";
 
 export const MealUsersEdit: React.FC = () => {
   const t = useTranslate();
-  const { dataGridProps } = useDataGrid<IMealUser>();
   const {
     saveButtonProps,
     refineCore: { queryResult, autoSaveProps },
     register,
-    control,
     formState: { errors },
   } = useForm();
 

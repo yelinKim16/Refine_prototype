@@ -119,16 +119,12 @@ export const apiProvider = (
   }) => {
     let requestUrl = `${url}?`;
 
-    if (sorters) {
-      const generatedSort = generateSort(sorters);
-      if (generatedSort) {
-        const { _sort, _order } = generatedSort;
-        const sortQuery = {
-          _sort: _sort.join(","),
-          _order: _order.join(","),
-        };
-        requestUrl = `${requestUrl}&${stringify(sortQuery)}`;
-      }
+    if (sorters && sorters.length > 0) {
+      const sortQuery = {
+        _sort: sorters[0].field,
+        _order: sorters[0].order,
+      };
+      requestUrl = `${requestUrl}&${stringify(sortQuery)}`;
     }
 
     if (filters) {
@@ -138,15 +134,6 @@ export const apiProvider = (
 
     if (query) {
       requestUrl = `${requestUrl}&${stringify(query)}`;
-    }
-
-    if (headers) {
-      // httpClient.defaults.headers = {
-      //   ...httpClient.defaults.headers,
-      //   ...headers,
-      // };
-      // (httpClient.defaults.headers = { ...httpClient.defaults.headers }),
-      // { ...headers };
     }
 
     let axiosResponse;

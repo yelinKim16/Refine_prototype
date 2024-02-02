@@ -31,3 +31,14 @@ export interface IMealHistoryFilterVariables {
   category: string;
   departmentNm: IDepartment;
 }
+
+export interface ISetting {
+  id: number;
+  name: string;
+  time: string;
+}
+
+export interface FormValues {
+  name?: string;
+  time?: string;
+}
