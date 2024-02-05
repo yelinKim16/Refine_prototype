@@ -1,17 +1,42 @@
-import { CheckBox } from "@mui/icons-material";
-import {
-  Card,
-  CardContent,
-  FormControl,
-  Divider,
-  FormControlLabel,
-  FormGroup,
-  Button,
-} from "@mui/material";
+import * as React from "react";
+import { Card, CardContent, FormControl, Divider, Button } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
+import TextField from "@mui/material/TextField";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo, deleteTodo } from "modules/todo/actions";
+import { RootState } from "modules";
 
 export const BaseInfo: React.FC = (props) => {
+  const [value, setValue] = React.useState("");
+  const dispatch = useDispatch();
+
+  // list 조회
+  const todolist = useSelector((state: RootState) => state.todo.todo);
+
+  // todo update
+  const updateTodo = React.useCallback(
+    (todo: string) => dispatch(addTodo({ todo: todo })),
+    [dispatch]
+  );
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateTodo(value);
+    setValue("");
+  };
+
+  // todo delete
+  const removeTodo = React.useCallback(
+    () => dispatch(deleteTodo()),
+    [dispatch]
+  );
+
   return (
     <FormControl fullWidth>
       <Card>
@@ -22,27 +47,34 @@ export const BaseInfo: React.FC = (props) => {
             </Typography>
           </Box>
           <Divider />
-          <Box>
-            <FormGroup>
-              <FormControlLabel
-                control={<CheckBox name="usedMealHistories" />}
-                label="식권이력 활성화"
-                // onChange={onChangeSettingCheckBox}
+          <Box
+            sx={{
+              m: 3,
+            }}
+          >
+            <form onSubmit={onSubmit}>
+              <TextField
+                placeholder="TodoList input"
+                value={value}
+                onChange={onChange}
+                size="small"
               />
-            </FormGroup>
+              <Button type="submit" variant="contained" sx={{ ml: 2 }}>
+                등록
+              </Button>
+            </form>
           </Box>
         </CardContent>
         <Divider />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            p: 2,
-          }}
-        >
-          <Button color="info" variant="contained">
-            저장
-          </Button>
+        <Box sx={{ m: 2 }}>
+          <span onClick={removeTodo}>(X)</span>
+          {todolist.map((v) => {
+            return (
+              <li>
+                <span>{v}</span>
+              </li>
+            );
+          })}
         </Box>
       </Card>
     </FormControl>

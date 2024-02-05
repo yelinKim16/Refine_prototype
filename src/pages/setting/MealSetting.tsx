@@ -1,10 +1,9 @@
 import { Typography } from "@mui/material";
-import { Card, CardContent, Divider } from "@mui/material";
+import { Card, CardContent, Divider, Button } from "@mui/material";
 import { Box } from "@mui/material";
 import * as React from "react";
 import { ISetting } from "interfaces";
 import { useForm } from "@refinedev/react-hook-form";
-import TextField from "@mui/material/TextField";
 import { mockSetting } from "components/mock/mockSetting";
 import { Breakfast } from "./mealTimeControl/Breakfast";
 
@@ -47,7 +46,14 @@ export const MealSetting: React.FC = (props) => {
             p: 2,
           }}
         >
-          <input type="submit" value="Submit" />
+          <Button
+            type="submit"
+            value="Submit"
+            variant="contained"
+            sx={{ ml: 2 }}
+          >
+            등록
+          </Button>
         </Box>
       </Card>
     </form>

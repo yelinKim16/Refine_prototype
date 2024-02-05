@@ -1,18 +1,20 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-
 import "./i18n";
-
+import { Provider } from "react-redux";
+import reportWebVitals from "./reportWebVitals";
+import { createStore } from "redux";
+import rootReducer from "modules";
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <React.Suspense fallback="loading">
-      <App />
+      <Provider store={createStore(rootReducer)}>
+        <App />
+      </Provider>
     </React.Suspense>
   </React.StrictMode>
 );

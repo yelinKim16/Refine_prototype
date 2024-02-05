@@ -7,6 +7,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 
 import MealSetting from "./MealSetting";
 import BaseInfo from "./BaseInfo";
+
 export const Setting: React.FC = () => {
   //Tab
   const [value, setValue] = React.useState("base_info");
