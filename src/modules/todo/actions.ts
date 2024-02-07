@@ -1,5 +1,6 @@
 import { deprecated } from "typesafe-actions";
 
+// 이를 통해 액션 생성 함수 편리하게 구현.
 const { createStandardAction } = deprecated;
 
 // 액션 정의

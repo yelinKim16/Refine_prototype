@@ -1,4 +1,4 @@
-// Action 들의 실질적 기능 구현 파일
+// Action 실질적 기능 구현 파일
 
 import { TodoAction, Todo } from "./types";
 import { createReducer } from "typesafe-actions";
