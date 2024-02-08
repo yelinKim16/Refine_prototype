@@ -86,8 +86,8 @@ function App() {
                     },
                   },
                   {
-                    name: "setting",
-                    list: "/setting",
+                    name: "settings",
+                    list: "/settings",
                     // create: "/setting/create",
                     // edit: "/setting/edit/:id",
                     // show: "/setting/breakfast",
@@ -125,7 +125,7 @@ function App() {
                       <Route path="edit/:id" element={<MealUsersEdit />} />
                       <Route path="show/:id" element={<MealUsersShow />} />
                     </Route>
-                    <Route path="/setting">
+                    <Route path="/settings">
                       <Route index element={<Setting />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />

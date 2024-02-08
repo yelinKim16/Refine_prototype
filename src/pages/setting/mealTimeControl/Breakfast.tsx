@@ -1,48 +1,45 @@
+import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { Box, Typography, Button } from "@mui/material";
 // import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "modules";
-import * as type from "modules/setting/types";
-import React, { ChangeEvent, useCallback, useEffect } from "react";
-import { settingItem } from "modules/setting/types";
-import { getSettingList, putSetting } from "modules/setting/actions";
-import { changeSetting } from "modules/setting/actions";
+import { HttpError, useList, useUpdate } from "@refinedev/core";
+import React from "react";
+
+interface ISetting {
+  id: number;
+  name: string;
+  time: string;
+}
 
 export const Breakfast: React.FC = () => {
-  const [value, setValue] = React.useState("");
+  const { mutate } = useUpdate();
 
-  const dispatch = useDispatch();
+  const { data, isLoading, isError } = useList<ISetting, HttpError>({
+    dataProviderName: "settingData",
+  });
 
-  //list 가져오기
-  const settingList = useSelector(
-    (state: RootState) => state.setting.settingList
-  );
-  // console.log(settingList);
+  const settingList = data?.data ?? [];
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Something went wrong!</div>;
+  }
 
   const handleSettingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    mutate({
+      resource: "settings",
+      values: {
+        key: e.target.name,
+        value: e.target.value,
+      },
+      id: 1,
+    });
   };
-
-  // const handleSettingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   dispatch(changeSetting({ key: e.target.name, value: e.target.value }));
-  // };
-
-  // const updateSetting = React.useCallback(
-  //   (setting: settingItem) => dispatch(putSetting(setting)),
-  //   [dispatch]
-  // );
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
-
-  // const loadSetting = useCallback(() => {
-  //   dispatch(getSettingList());
-  // }, [dispatch]);
 
   return (
-    <form onSubmit={onSubmit}>
+    <>
       <Box
         sx={{
           alignItems: "flex-end",
@@ -70,28 +67,41 @@ export const Breakfast: React.FC = () => {
         >
           <TextField
             id="breakfastStartTime"
-            name="breakfastStartime"
-            defaultValue={settingList[0].breakfastStartTime}
+            name="breakfastStartTime"
+            defaultValue={
+              settingList
+                ? settingList.find(
+                    (setting) => setting.name === "breakfastStartTime"
+                  )?.time
+                : ""
+            }
             label="시작시간"
             type="time"
             margin="normal"
             onChange={handleSettingChange}
           />
+
           <Typography sx={{ mb: 3, mr: 3, ml: 3 }}>~</Typography>
-          {/* <TextField
+          <TextField
             id="breakfastEndTime"
             name="breakfastEndTime"
-            value={settingList[0].breakfastEndTime}
+            defaultValue={
+              settingList
+                ? settingList.find(
+                    (setting) => setting.name === "breakfastEndTime"
+                  )?.time
+                : ""
+            }
             label="종료시간"
             type="time"
             margin="normal"
             onChange={handleSettingChange}
-          /> */}
+          />
         </Box>
       </Box>
       <Button type="submit" variant="contained" sx={{ ml: 2 }}>
         등록
       </Button>
-    </form>
+    </>
   );
 };

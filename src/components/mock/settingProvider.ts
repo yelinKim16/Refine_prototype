@@ -34,17 +34,9 @@ export const settingProvider: DataProvider = {
     };
   },
   update: async ({ resource, id, variables, meta }) => {
-    dataList = dataList.map((e) =>
-      e.id === Number(id)
-        ? {
-            ...{
-              id: e.id,
-              name: JSON.parse(JSON.stringify(variables)).name,
-            },
-          }
-        : e
-    );
-    const data: any = variables;
+    var param = JSON.parse(JSON.stringify(variables));
+    dataList.find((setting) => setting.name === param.key).time = param.value;
+    const data: any = dataList;
     return {
       data,
     };
