@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
-// import * as React from "react";
 import { HttpError, useList, useUpdate } from "@refinedev/core";
 import React from "react";
 
@@ -10,7 +9,7 @@ interface ISetting {
   time: string;
 }
 
-export const Breakfast: React.FC = () => {
+export const Lunch: React.FC = () => {
   const { mutate } = useUpdate();
 
   const { data, isLoading, isError } = useList<ISetting, HttpError>({
@@ -18,14 +17,6 @@ export const Breakfast: React.FC = () => {
   });
 
   const settingList = data?.data ?? [];
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Something went wrong!</div>;
-  }
 
   const handleSettingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     mutate({
@@ -38,10 +29,13 @@ export const Breakfast: React.FC = () => {
     });
   };
 
-  const handleSubmit = () => {
-    //설정값 백엔드로 전송
-    console.log("식수 시간 변경");
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Something went wrong!</div>;
+  }
 
   return (
     <>
@@ -61,7 +55,7 @@ export const Breakfast: React.FC = () => {
             color: "text.secondary",
           }}
         >
-          조식
+          중식
         </Typography>
         <Box
           sx={{
@@ -71,12 +65,12 @@ export const Breakfast: React.FC = () => {
           }}
         >
           <TextField
-            id="breakfastStartTime"
-            name="breakfastStartTime"
+            id="lunchStartTime"
+            name="lunchStartTime"
             defaultValue={
               settingList
                 ? settingList.find(
-                    (setting) => setting.name === "breakfastStartTime"
+                    (setting) => setting.name === "lunchStartTime"
                   )?.time
                 : ""
             }
@@ -88,13 +82,12 @@ export const Breakfast: React.FC = () => {
 
           <Typography sx={{ mb: 3, mr: 3, ml: 3 }}>~</Typography>
           <TextField
-            id="breakfastEndTime"
-            name="breakfastEndTime"
+            id="lunchEndTime"
+            name="lunchEndTime"
             defaultValue={
               settingList
-                ? settingList.find(
-                    (setting) => setting.name === "breakfastEndTime"
-                  )?.time
+                ? settingList.find((setting) => setting.name === "lunchEndTime")
+                    ?.time
                 : ""
             }
             label="종료시간"

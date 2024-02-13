@@ -34,8 +34,8 @@ export const settingProvider: DataProvider = {
     };
   },
   update: async ({ resource, id, variables, meta }) => {
-    var param = JSON.parse(JSON.stringify(variables));
-    dataList.find((setting) => setting.name === param.key).time = param.value;
+    var param = JSON.parse(JSON.stringify(variables)); // 깊은 복사
+    dataList.find((setting) => setting.name === param.key).time = param.value; //dataList 배열을 돌면서 param의 key 가 dataList의 name과 일치하는 것 찾아서 그것의 time을 value로 변경
     const data: any = dataList;
     return {
       data,

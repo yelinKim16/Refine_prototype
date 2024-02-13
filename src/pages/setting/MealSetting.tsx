@@ -4,8 +4,9 @@ import { Box } from "@mui/material";
 import * as React from "react";
 import { ISetting } from "interfaces";
 import { useForm } from "@refinedev/react-hook-form";
-import { mockSetting } from "components/mock/mockSetting";
 import { Breakfast } from "./mealTimeControl/Breakfast";
+import { Lunch } from "./mealTimeControl/lunch";
+import { Dinner } from "./mealTimeControl/dinner";
 
 export const MealSetting: React.FC = (props) => {
   const {
@@ -19,11 +20,6 @@ export const MealSetting: React.FC = (props) => {
       action: "edit",
     },
   });
-  const settings = productQueryResult?.data?.data;
-
-  const data = mockSetting;
-  const breakfastST = data?.find((item) => item.name === "breakfastStartTime");
-  const breakfastET = data?.find((item) => item.name === "breakfastEndTime");
 
   return (
     <form onSubmit={handleSubmit(onFinish)}>
@@ -36,25 +32,22 @@ export const MealSetting: React.FC = (props) => {
           </Box>
           <Divider />
           <Breakfast />
-          <Box></Box>
+          <Lunch />
+          <Dinner />
+          <Divider />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              p: 2,
+            }}
+          >
+            <Button type="submit" variant="contained" sx={{ ml: 2 }}>
+              등록
+            </Button>
+          </Box>
         </CardContent>
         <Divider />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            p: 2,
-          }}
-        >
-          <Button
-            type="submit"
-            value="Submit"
-            variant="contained"
-            sx={{ ml: 2 }}
-          >
-            등록
-          </Button>
-        </Box>
       </Card>
     </form>
   );
