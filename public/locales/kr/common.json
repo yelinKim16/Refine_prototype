@@ -59,5 +59,26 @@
       "edit": "사용자 편집",
       "show": "사용자 정보"
     }
+  },
+  "settings": {
+    "settings": "설정"
+  },
+  "workPlace": {
+    "workPlace": "사업장",
+    "titles": {
+      "list": "사업장 구조"
+    },
+    "fields": {
+      "name": "이름",
+      "category": "카테고리"
+    }
+  },
+
+  "entryDoors": {
+    "entryDoor": "출입문 구조",
+    "fields": {
+      "name": "이름",
+      "type": "타입"
+    }
   }
 }

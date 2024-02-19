@@ -93,6 +93,30 @@ export const MealUsersEdit: React.FC = () => {
           name="positionNm"
           autoFocus
         />
+        <TextField
+          id="createDt"
+          {...register("createDt", {
+            required: "This field is required",
+          })}
+          error={!!errors.price}
+          margin="normal"
+          fullWidth
+          label={t("mealUsers.fields.createDt")}
+          name="createDt"
+          autoFocus
+        />
+        <TextField
+          id="modifyDt"
+          {...register("modifyDt", {
+            required: "This field is required",
+          })}
+          error={!!errors.price}
+          margin="normal"
+          fullWidth
+          label={t("mealUsers.fields.modifyDt")}
+          name="modifyDt"
+          autoFocus
+        />
       </Box>
     </Edit>
   );

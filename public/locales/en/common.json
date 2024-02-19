@@ -40,7 +40,7 @@
   "mealUsers": {
     "mealUsers": "MealUsers",
     "fields": {
-      "empNo": "EmpNp",
+      "empNo": "EmpNo",
       "empNm": "EmpNm",
       "empType": "EmpType",
       "companyNm": "CompanyNm",
@@ -54,6 +54,12 @@
       "create": "MealUsers Create",
       "edit": "MealUsers Edit",
       "show": "MealUsers Info"
+    }
+  },
+  "entryDoors": {
+    "entryDoors": "EntryDoor",
+    "fields": {
+      "name": "name"
     }
   }
 }

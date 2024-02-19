@@ -9,7 +9,7 @@ import { Create } from "@refinedev/mui";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { IMealUser } from "interfaces";
-import { ReactNode } from "react";
+
 export const MealUsersCreate: React.FC = () => {
   const {
     saveButtonProps,
@@ -32,7 +32,6 @@ export const MealUsersCreate: React.FC = () => {
             required: "This field is required",
           })}
           error={!!errors.empNo}
-          // helperText={errors.empNo?.message as ReactNode}
           margin="normal"
           fullWidth
           label="EmpNo"
@@ -43,61 +42,55 @@ export const MealUsersCreate: React.FC = () => {
           {...register("empNm", {
             required: "This field is required",
           })}
-          error={!!errors.price}
-          // helperText={errors.price?.message as ReactNode}
+          error={!!errors.empNm}
           margin="normal"
           fullWidth
           label="EmpNm"
           name="empNm"
         />
         <TextField
-          id="companyNm"
-          {...register("companyNm", {
+          id="empType"
+          {...register("empType", {
             required: "This field is required",
           })}
-          error={!!errors.empNo}
-          // helperText={errors.empNo?.message as ReactNode}
+          error={!!errors.empType}
           margin="normal"
           fullWidth
-          label="CompanyNm"
-          name="companyNm"
+          label="EmpType"
+          name="empType"
         />
         <TextField
           id="companyNm"
           {...register("companyNm", {
             required: "This field is required",
           })}
-          error={!!errors.empNo}
-          // helperText={errors.empNo?.message as ReactNode}
+          error={!!errors.companyNm}
           margin="normal"
           fullWidth
           label="CompanyNm"
           name="companyNm"
+        />
+        <TextField
+          id="departmentNm"
+          {...register("departmentNm", {
+            required: "This field is required",
+          })}
+          error={!!errors.departmentNm}
+          margin="normal"
+          fullWidth
+          label="DepartmentNm"
+          name="departmentNm"
         />
         <TextField
           id="positionNm"
           {...register("positionNm", {
             required: "This field is required",
           })}
-          error={!!errors.empNo}
-          // helperText={errors.empNo?.message as ReactNode}
+          error={!!errors.positionNm}
           margin="normal"
           fullWidth
           label="PositionNm"
           name="positionNm"
-        />
-
-        <TextField
-          id="description"
-          {...register("description", {
-            required: "This field is required",
-          })}
-          error={!!errors.description}
-          // helperText={errors.description?.message as ReactNode}
-          margin="normal"
-          fullWidth
-          label="Description"
-          name="description"
         />
       </Box>
     </Create>

@@ -27,13 +27,15 @@ import {
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
-import { mealHistoriesProvider } from "components/mock/mockProvider";
 import { usersProvider } from "components/mock/usersProvider";
 import { settingProvider } from "components/mock/settingProvider";
 import "./i18n";
-// import dataProvider, { axiosInstance } from "@refinedev/simple-rest";
-// import { apiProvider } from "components/provider/apiProvider";
+import dataProvider, { axiosInstance } from "@refinedev/simple-rest";
+import { apiProvider } from "components/provider/apiProvider";
 import { Setting } from "pages/setting";
+import { EntryDoor } from "pages/entryDoor/list";
+import { workPlaceProvider } from "components/mock/workPlaceProvider";
+import { entryDoorProvider } from "components/mock/workEntryDoor";
 
 function App() {
   // npm i react-i18next i18next i18next-http-backend i18next-browser-languagedetector
@@ -56,11 +58,13 @@ function App() {
             <DevtoolsProvider>
               <Refine
                 dataProvider={{
-                  default: mealHistoriesProvider,
-                  // default: dataProvider("/api"),
+                  // default: mealHistoriesProvider,
+                  default: dataProvider("/api"),
                   userData: usersProvider,
                   settingData: settingProvider,
-                  // api: apiProvider("/api", axiosInstance),
+                  workPlace: workPlaceProvider,
+                  entryDoor: entryDoorProvider,
+                  api: apiProvider("/api", axiosInstance),
                 }}
                 i18nProvider={i18nProvider}
                 notificationProvider={notificationProvider}
@@ -72,6 +76,7 @@ function App() {
                     show: "/mealHistories/show/:id",
                     meta: {
                       canDelete: true,
+                      dataProviderName: "api",
                     },
                   },
                   {
@@ -81,18 +86,29 @@ function App() {
                     edit: "/mealUsers/edit/:id",
                     show: "/mealUsers/show/:id",
                     meta: {
-                      dataProviderName: "userData",
                       canDelete: true,
+                      dataProviderName: "api",
                     },
                   },
                   {
                     name: "settings",
                     list: "/settings",
-                    // create: "/setting/create",
-                    // edit: "/setting/edit/:id",
-                    // show: "/setting/breakfast",
                     meta: {
                       dataProviderName: "settingData",
+                    },
+                  },
+                  {
+                    name: "workPlace",
+                    list: "/workPlace",
+                    meta: {
+                      dataProviderName: "workPlace",
+                    },
+                  },
+                  {
+                    name: "entryDoor",
+                    list: "/entryDoor",
+                    meta: {
+                      dataProviderName: "entryDoor",
                     },
                   },
                 ]}
@@ -127,6 +143,9 @@ function App() {
                     </Route>
                     <Route path="/settings">
                       <Route index element={<Setting />} />
+                    </Route>
+                    <Route path="/workPlace">
+                      <Route index element={<EntryDoor />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
