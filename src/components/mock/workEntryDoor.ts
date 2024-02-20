@@ -3,8 +3,12 @@ import { mockEntryDoor } from "./mockEntryDoor";
 var wpList: any[] = mockEntryDoor;
 
 export const entryDoorProvider: DataProvider = {
-  getList: async ({ resource, pagination }) => {
-    const data: any = JSON.parse(JSON.stringify(wpList));
+  getList: async ({ resource, pagination, filters }) => {
+    let data: any = JSON.parse(JSON.stringify(wpList));
+
+    if (filters != null) {
+      data = wpList.filter((e) => e.workPlace.id === Number(filters[0].value));
+    }
 
     return {
       data: data,

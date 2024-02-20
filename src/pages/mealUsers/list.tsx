@@ -69,17 +69,17 @@ export const MealUsersList: React.FC = () => {
         field: "createDt",
         headerName: t("mealUsers.fields.createDt"),
         width: 160,
-        renderCell: function render({ value }) {
-          return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
-        },
+        // renderCell: function render({ value }) {
+        //   return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
+        // },
       },
       {
         field: "modifyDt",
         headerName: t("mealUsers.fields.modifyDt"),
         width: 160,
-        renderCell: function render({ value }) {
-          return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
-        },
+        // renderCell: function render({ value }) {
+        //   return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
+        // },
       },
 
       {

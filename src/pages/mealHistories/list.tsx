@@ -178,7 +178,7 @@ export const MealHistoryList: React.FC = () => {
                 render={({ field }) => (
                   <Autocomplete<IDepartment>
                     id="departmentNm"
-                    options={["development", "sales", "humanResource"]}
+                    options={["개발부", "영업부", "인사부"]}
                     {...field}
                     onChange={(_, value) => {
                       field.onChange(value);

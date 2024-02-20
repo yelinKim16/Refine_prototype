@@ -1,4 +1,4 @@
-export type IDepartment = "development" | "sales" | "humanResource";
+export type IDepartment = "개발부" | "인사부" | "영업부";
 
 export interface IMealHistory {
   id: number;
@@ -47,7 +47,7 @@ export interface FormValues {
 export interface IWorkPlace {
   id: number;
   name: string;
-  category: number;
+  category: string;
   companyNm: string;
   type: string;
 }

@@ -29,13 +29,13 @@ export const EntryDoor: React.FC<IResourceComponentsProps> = () => {
   const { dataGridProps } = useDataGrid<IWorkPlace>();
   const workPlaceIds = dataGridProps.rows.map((item) => item.id);
 
-  const { data } = useMany<IWorkPlace>({
-    resource: "workPlace",
-    ids: workPlaceIds,
-    queryOptions: {
-      enabled: workPlaceIds.length > 0,
-    },
-  });
+  // const { data } = useMany<IWorkPlace>({
+  //   resource: "workPlace",
+  //   ids: workPlaceIds,
+  //   queryOptions: {
+  //     enabled: workPlaceIds.length > 0,
+  //   },
+  // });
 
   const t = useTranslate();
 
@@ -95,7 +95,7 @@ export const EntryDoor: React.FC<IResourceComponentsProps> = () => {
   } = useTable<IWorkPlace>({
     columns,
     initialState: {
-      sorting: [{ id: "title", desc: false }],
+      sorting: [{ id: "name", desc: false }],
     },
   });
 
@@ -200,15 +200,6 @@ const CategoryProductsTable: React.FC<{ record: IWorkPlace }> = ({
   const { dataGridProps } = useDataGrid<IEntryDoor>({
     resource: "entryDoor",
     initialPageSize: 5,
-    // filters: {
-    //   permanent: [
-    //     {
-    //       field: "workPlace.id",
-    //       operator: "eq",
-    //       value: record.id,
-    //     },
-    //   ],
-    // },
     filters: {
       permanent: [
         {
@@ -218,10 +209,7 @@ const CategoryProductsTable: React.FC<{ record: IWorkPlace }> = ({
         },
       ],
     },
-
-    syncWithLocation: false,
   });
-
   // 하위 테이블 colums
   const columns = React.useMemo<GridColDef<IEntryDoor>[]>(
     () => [

@@ -40,9 +40,15 @@ export const apiProvider = (
       query._order = _order.join(",");
     }
 
-    const { data, headers } = await httpClient.get(
+    let { data, headers } = await httpClient.get(
       `${url}?${stringify(query)}&${stringify(queryFilters)}`
     );
+
+    if (filters && filters.length > 0) {
+      data.data = data.data.filter(
+        (e: any) => e.departmentNm === queryFilters.departmentNm
+      );
+    }
 
     const total = +headers["x-total-count"];
 

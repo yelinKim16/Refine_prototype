@@ -3,8 +3,15 @@ import { mealHistoryList } from "./mockMealHistories";
 var dataList: any[] = mealHistoryList;
 
 export const mealHistoriesProvider: DataProvider = {
-  getList: async ({ resource, pagination }) => {
-    const data: any = JSON.parse(JSON.stringify(dataList));
+  getList: async ({ resource, pagination, filters }) => {
+    let data: any = JSON.parse(JSON.stringify(dataList));
+
+    // console.log(filters);
+    console.log("gkdl");
+    // if (filters != null) {
+    //   var searchDepNmData = dataList.filter()
+    // }
+
     return {
       data: data,
       total: data.length,
