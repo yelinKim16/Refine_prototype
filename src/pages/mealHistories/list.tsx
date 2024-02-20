@@ -186,8 +186,8 @@ export const MealHistoryList: React.FC = () => {
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        label="DepartmentNm"
-                        placeholder="Post departmentNm"
+                        label="Department"
+                        placeholder="Select"
                         margin="normal"
                         size="small"
                         style={{ width: "140px" }}

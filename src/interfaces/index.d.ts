@@ -33,6 +33,12 @@ export interface IMealHistoryFilterVariables {
   departmentNm: IDepartment;
 }
 
+export interface IMealUserFilterVariables {
+  q: string;
+  category: string;
+  departmentNm: IDepartment;
+}
+
 export interface ISetting {
   id: number;
   name: string;
@@ -65,11 +71,3 @@ export interface IEntryDoor {
   type: string;
   category: string;
 }
-
-// export interface IEntryDoor {
-//   id: number;
-//   name: string;
-//   workPlace: IWorkPlace;
-//   type: string;
-//   category: string;
-// }

@@ -44,7 +44,23 @@ export const apiProvider = (
       `${url}?${stringify(query)}&${stringify(queryFilters)}`
     );
 
-    if (filters && filters.length > 0) {
+    // 검색값에 따른 Search
+    if (queryFilters.q && queryFilters.q.length > 0) {
+      const searchKeyword = String(
+        //공백 및 대소문자 표준화
+        queryFilters.q.split(" ").join("").toLowerCase()
+      );
+
+      data.data = data.data.filter(
+        (e: any) =>
+          e.empNm.toLowerCase().includes(searchKeyword) || // 사원명
+          e.companyNm.toLowerCase().includes(searchKeyword) || // 회사명
+          e.empNo.toString().toLowerCase().includes(searchKeyword) // 사원번호
+      );
+    }
+
+    // 부서에 따른 Search
+    if (queryFilters.departmentNm && queryFilters.departmentNm.length > 0) {
       data.data = data.data.filter(
         (e: any) => e.departmentNm === queryFilters.departmentNm
       );

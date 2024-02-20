@@ -1,9 +1,21 @@
 import React, { ComponentProps } from "react";
-import { useTranslate } from "@refinedev/core";
-import { IMealUser } from "interfaces";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import {
-  DateField,
+  CrudFilters,
+  HttpError,
+  getDefaultFilter,
+  useTranslate,
+} from "@refinedev/core";
+import {
+  IDepartment,
+  IMealUser,
+  IMealUserFilterVariables,
+  Nullable,
+} from "interfaces";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import Button from "@mui/material/Button";
+import { Controller } from "react-hook-form";
+import { Box } from "@mui/system";
+import {
   EditButton,
   List,
   ShowButton,
@@ -11,15 +23,46 @@ import {
   DeleteButton,
   TagField,
 } from "@refinedev/mui";
+import {
+  Autocomplete,
+  Card,
+  CardContent,
+  Grid,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
+import { useForm } from "@refinedev/react-hook-form";
+import { SearchOutlined } from "@mui/icons-material";
 export const MealUsersList: React.FC = () => {
   const t = useTranslate(); // 다국어 지원
-  const { dataGridProps } = useDataGrid<IMealUser>();
-  const {
-    paginationMode,
-    paginationModel,
-    onPaginationModelChange,
-    ...restDataGridProps
-  } = dataGridProps;
+
+  const { dataGridProps, filters, search } = useDataGrid<
+    IMealUser,
+    HttpError,
+    Nullable<IMealUserFilterVariables>
+  >({
+    onSearch: (params) => {
+      const filters: CrudFilters = [];
+      const { q, departmentNm } = params;
+
+      filters.push(
+        {
+          field: "q",
+          operator: "eq",
+          value: q,
+        },
+        {
+          field: "departmentNm",
+          operator: "eq",
+          value: departmentNm ? departmentNm : undefined,
+        }
+      );
+      return filters;
+    },
+  });
+
+  const { paginationMode, paginationModel, onPaginationModelChange } =
+    dataGridProps;
 
   const columns = React.useMemo<GridColDef<IMealUser>[]>(
     () => [
@@ -103,16 +146,101 @@ export const MealUsersList: React.FC = () => {
     [t]
   );
 
+  //검색 Filter
+  const { control, register, handleSubmit } = useForm<
+    IMealUser,
+    HttpError,
+    Nullable<IMealUserFilterVariables>
+  >({
+    defaultValues: {
+      q: getDefaultFilter("q", filters, "eq"),
+      category: getDefaultFilter("status", filters, "eq"),
+      departmentNm: getDefaultFilter("departmentNm", filters, "eq"),
+    },
+  });
+
   return (
-    <List>
-      <DataGrid
-        {...dataGridProps}
-        columns={columns}
-        paginationMode={paginationMode}
-        paginationModel={paginationModel}
-        onPaginationModelChange={onPaginationModelChange}
-        autoHeight
-      />
-    </List>
+    <Grid container spacing={2}>
+      <Grid item xs={12} lg={12}>
+        <Card sx={{ paddingX: { xs: 2, md: 0 } }}>
+          <CardContent sx={{ pt: 0 }}>
+            <Box
+              component="form"
+              sx={{
+                display: "flex",
+                alignItems: "center;",
+              }}
+              autoComplete="off"
+              onSubmit={handleSubmit(search)}
+            >
+              <TextField
+                {...register("q")}
+                id="q"
+                label="Search"
+                placeholder="Id, Name, Company, etc."
+                margin="normal"
+                sx={{ mr: 2 }}
+                autoFocus
+                size="small"
+                InputProps={{
+                  // iCon
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchOutlined />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+
+              <Controller
+                control={control}
+                name="departmentNm"
+                render={({ field }) => (
+                  <Autocomplete<IDepartment>
+                    id="departmentNm"
+                    options={["개발부", "영업부", "인사부"]}
+                    {...field}
+                    onChange={(_, value) => {
+                      field.onChange(value);
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Department"
+                        placeholder="Post departmentNm"
+                        margin="normal"
+                        size="small"
+                        style={{ width: "140px" }}
+                      />
+                    )}
+                  />
+                )}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ height: 38, width: 90, ml: 1, mt: 1 }}
+              >
+                {t("buttons.search")}
+              </Button>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={12} lg={12}>
+        <List>
+          <DataGrid
+            {...dataGridProps}
+            columns={columns}
+            disableColumnFilter={true}
+            filterModel={undefined}
+            paginationMode={paginationMode}
+            paginationModel={paginationModel}
+            onPaginationModelChange={onPaginationModelChange}
+            autoHeight
+          />
+        </List>
+      </Grid>
+    </Grid>
   );
 };
