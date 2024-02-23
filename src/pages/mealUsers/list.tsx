@@ -29,10 +29,14 @@ import {
   CardContent,
   Grid,
   InputAdornment,
+  Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useForm } from "@refinedev/react-hook-form";
 import { SearchOutlined } from "@mui/icons-material";
+import Avatar from "@mui/material/Avatar";
+
 export const MealUsersList: React.FC = () => {
   const t = useTranslate(); // 다국어 지원
 
@@ -67,14 +71,22 @@ export const MealUsersList: React.FC = () => {
   const columns = React.useMemo<GridColDef<IMealUser>[]>(
     () => [
       {
+        field: "empNm",
+        headerName: t("mealUsers.fields.empNm"),
+        width: 140,
+        renderCell: function render({ row }) {
+          return (
+            <Stack alignItems="center" direction="row" spacing={2}>
+              <Avatar alt={`${row.empNm}`} src={row.avatar?.[0]?.url} />
+              <Typography variant="body2">{row.empNm}</Typography>
+            </Stack>
+          );
+        },
+      },
+      {
         field: "empNo",
         headerName: t("mealUsers.fields.empNo"),
         minWidth: 100,
-      },
-      {
-        field: "empNm",
-        headerName: t("mealUsers.fields.empNm"),
-        width: 100,
       },
       {
         field: "empType",
@@ -96,12 +108,12 @@ export const MealUsersList: React.FC = () => {
       {
         field: "companyNm",
         headerName: t("mealUsers.fields.companyNm"),
-        width: 110,
+        width: 100,
       },
       {
         field: "departmentNm",
         headerName: t("mealUsers.fields.departmentNm"),
-        width: 120,
+        width: 100,
       },
       {
         field: "positionNm",
@@ -119,7 +131,7 @@ export const MealUsersList: React.FC = () => {
       {
         field: "modifyDt",
         headerName: t("mealUsers.fields.modifyDt"),
-        width: 160,
+        width: 150,
         // renderCell: function render({ value }) {
         //   return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
         // },

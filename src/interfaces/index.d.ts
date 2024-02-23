@@ -14,6 +14,7 @@ export interface IMealHistory {
 
 export interface IMealUser {
   id: number;
+  empNo: string;
   empNm: string;
   empType: string;
   companyNm: string;
@@ -21,6 +22,17 @@ export interface IMealUser {
   positionNm: string;
   createDt: number;
   modifyDt: number;
+  avatar: IFile[];
+}
+
+export interface IFile {
+  name: string;
+  percent: number;
+  size: number;
+  status: "error" | "success" | "done" | "uploading" | "removed";
+  type: string;
+  uid: string;
+  url: string;
 }
 
 export type Nullable<T> = {
