@@ -22,7 +22,7 @@ export interface IMealUser {
   positionNm: string;
   createDt: number;
   modifyDt: number;
-  avatar: IFile[];
+  avatar: IFile;
 }
 
 export interface IFile {

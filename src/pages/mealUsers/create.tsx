@@ -63,15 +63,13 @@ export const MealUsersCreate: React.FC<IResourceComponentsProps> = () => {
 
     const { name, size, type, lastModified } = file;
 
-    const imagePaylod: any = [
-      {
-        name,
-        size,
-        type,
-        lastModified,
-        url: res.data,
-      },
-    ];
+    const imagePaylod: any = {
+      name,
+      size,
+      type,
+      lastModified,
+      url: res.data,
+    };
     setValue("avatar", imagePaylod, {
       shouldDirty: true,
     });
@@ -116,9 +114,7 @@ export const MealUsersCreate: React.FC<IResourceComponentsProps> = () => {
                       lg: "200px",
                     },
                   }}
-                  src={
-                    (imageInput as IFile[]) && (imageInput as IFile[])[0].url
-                  }
+                  src={(imageInput as IFile) && (imageInput as IFile).url}
                   alt="User Picture"
                 />
               </label>

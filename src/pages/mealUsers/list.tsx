@@ -77,7 +77,7 @@ export const MealUsersList: React.FC = () => {
         renderCell: function render({ row }) {
           return (
             <Stack alignItems="center" direction="row" spacing={2}>
-              <Avatar alt={`${row.empNm}`} src={row.avatar?.[0]?.url} />
+              <Avatar alt={`${row.empNm}`} src={row.avatar.url} />
               <Typography variant="body2">{row.empNm}</Typography>
             </Stack>
           );
