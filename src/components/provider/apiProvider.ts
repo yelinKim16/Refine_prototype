@@ -66,6 +66,26 @@ export const apiProvider = (
       );
     }
 
+    // 오름내림차순 정렬
+    if (generatedSort?._sort != null) {
+      const sortField = generatedSort?._sort[0];
+      const sortOrder = generatedSort?._order[0];
+
+      data.data.sort((a: any, b: any) => {
+        const aValue = a[sortField];
+        const bValue = b[sortField];
+        if (sortOrder === "asc") {
+          if (aValue < bValue) return -1;
+          if (aValue > bValue) return 1;
+          return 0;
+        } else if (sortOrder === "desc") {
+          if (aValue > bValue) return -1;
+          if (aValue < bValue) return 1;
+          return 0;
+        }
+      });
+    }
+
     const total = +headers["x-total-count"];
 
     return {

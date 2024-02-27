@@ -3,9 +3,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useForm } from "@refinedev/react-hook-form";
 
-import { IMealUser } from "interfaces";
-import { useDataGrid } from "@refinedev/mui";
 import { useTranslate } from "@refinedev/core";
+import { Avatar } from "@mui/material";
 
 export const MealUsersEdit: React.FC = () => {
   const t = useTranslate();
@@ -23,6 +22,7 @@ export const MealUsersEdit: React.FC = () => {
         sx={{ display: "flex", flexDirection: "column" }}
         autoComplete="off"
       >
+        <Avatar />
         <TextField
           id="empNo"
           {...register("empNo", {
@@ -91,30 +91,6 @@ export const MealUsersEdit: React.FC = () => {
           fullWidth
           label={t("mealUsers.fields.positionNm")}
           name="positionNm"
-          autoFocus
-        />
-        <TextField
-          id="createDt"
-          {...register("createDt", {
-            required: "This field is required",
-          })}
-          error={!!errors.price}
-          margin="normal"
-          fullWidth
-          label={t("mealUsers.fields.createDt")}
-          name="createDt"
-          autoFocus
-        />
-        <TextField
-          id="modifyDt"
-          {...register("modifyDt", {
-            required: "This field is required",
-          })}
-          error={!!errors.price}
-          margin="normal"
-          fullWidth
-          label={t("mealUsers.fields.modifyDt")}
-          name="modifyDt"
           autoFocus
         />
       </Box>

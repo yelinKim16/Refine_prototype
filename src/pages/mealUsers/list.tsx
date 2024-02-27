@@ -22,6 +22,7 @@ import {
   useDataGrid,
   DeleteButton,
   TagField,
+  DateField,
 } from "@refinedev/mui";
 import {
   Autocomplete,
@@ -40,7 +41,7 @@ import Avatar from "@mui/material/Avatar";
 export const MealUsersList: React.FC = () => {
   const t = useTranslate(); // 다국어 지원
 
-  const { dataGridProps, filters, search } = useDataGrid<
+  const { dataGridProps, filters, search, sorters } = useDataGrid<
     IMealUser,
     HttpError,
     Nullable<IMealUserFilterVariables>
@@ -65,8 +66,7 @@ export const MealUsersList: React.FC = () => {
     },
   });
 
-  const { paginationMode, paginationModel, onPaginationModelChange } =
-    dataGridProps;
+  const { onSortModelChange, onPaginationModelChange } = dataGridProps;
 
   const columns = React.useMemo<GridColDef<IMealUser>[]>(
     () => [
@@ -124,17 +124,17 @@ export const MealUsersList: React.FC = () => {
         field: "createDt",
         headerName: t("mealUsers.fields.createDt"),
         width: 160,
-        // renderCell: function render({ value }) {
-        //   return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
-        // },
+        renderCell: function render({ value }) {
+          return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
+        },
       },
       {
         field: "modifyDt",
         headerName: t("mealUsers.fields.modifyDt"),
         width: 150,
-        // renderCell: function render({ value }) {
-        //   return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
-        // },
+        renderCell: function render({ value }) {
+          return <DateField format="YYYY-MM-DD HH:mm:ss" value={value} />;
+        }, // 생성ㅇ.생성. 생성하게 만드는 것
       },
 
       {
@@ -246,9 +246,6 @@ export const MealUsersList: React.FC = () => {
             columns={columns}
             disableColumnFilter={true}
             filterModel={undefined}
-            paginationMode={paginationMode}
-            paginationModel={paginationModel}
-            onPaginationModelChange={onPaginationModelChange}
             autoHeight
           />
         </List>
