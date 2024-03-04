@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React, { ComponentProps, useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
 import { HttpError } from "interfaces/errors/HttpError";
 import { useForm } from "@refinedev/react-hook-form";
@@ -11,6 +11,8 @@ import {
   CrudFilters,
   getDefaultFilter,
   useTranslate,
+  useNotification,
+  useImport,
 } from "@refinedev/core";
 import {
   DateField,
@@ -19,6 +21,7 @@ import {
   useDataGrid,
   ExportButton,
   TagField,
+  ImportButton,
 } from "@refinedev/mui";
 import {
   Autocomplete,
@@ -33,9 +36,10 @@ import {
   IMealHistoryFilterVariables,
   Nullable,
 } from "interfaces";
-
+import { useApiUrl } from "@refinedev/core";
 export const MealHistoryList: React.FC = () => {
   const t = useTranslate(); // 다국어 지원
+  const apiUrl = useApiUrl();
   const { dataGridProps, filters, search } = useDataGrid<
     IMealHistory,
     HttpError,
@@ -62,6 +66,51 @@ export const MealHistoryList: React.FC = () => {
     ids: mealHistoryIds,
     queryOptions: {
       enabled: mealHistoryIds.length > 0,
+    },
+  });
+
+  //excel upload
+  const [importProgress, setImportProgress] = useState({
+    processed: 0,
+    total: 0,
+  });
+  const { open } = useNotification();
+
+  const { inputProps, isLoading: importLoading } = useImport<IMealHistory>({
+    resource: "mealHistories",
+    paparseOptions: {
+      skipEmptyLines: true,
+    },
+
+    onProgress: ({ totalAmount, processedAmount }) => {
+      setImportProgress({
+        processed: processedAmount,
+        total: totalAmount,
+      });
+    },
+    mapData: (item) => {
+      return {
+        empNo: item.empNo,
+        empNm: item.empNm,
+        empType: item.empType,
+        departmentNm: item.departmentNm,
+        companyNm: item.companyNm,
+        positionNm: item.positionNm,
+        mealType: item.mealType,
+        mealDt: item.mealDt,
+      };
+    },
+    onFinish: (result) => {
+      result.succeeded.forEach((item) => {
+        console.log(item);
+        open?.({
+          message: `업로드 완료`,
+          type: "success",
+        });
+      });
+      result.errored.forEach((item) => {
+        console.log(item);
+      });
     },
   });
 
@@ -158,6 +207,12 @@ export const MealHistoryList: React.FC = () => {
     },
   });
 
+  //excel example download
+  const handleExampleDownload = () => {
+    var downloadUrl = `${apiUrl}/excelFile/download/mealHistory`;
+    window.location.href = downloadUrl;
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} lg={12}>
@@ -204,15 +259,20 @@ export const MealHistoryList: React.FC = () => {
                 {t("buttons.search")}
               </Button>
             </Box>
+            {/* 엑셀 예시 다운로드 */}
+            <Button onClick={handleExampleDownload}>예시파일다운</Button>
           </CardContent>
         </Card>
       </Grid>
       <Grid item xs={12} lg={12}>
         <List
           headerButtons={
-            <ExportButton onClick={triggerExport} loading={exportLoading}>
-              {t("buttons.excelExport")}
-            </ExportButton>
+            <Box>
+              <ImportButton loading={importLoading} inputProps={inputProps} />
+              <ExportButton onClick={triggerExport} loading={exportLoading}>
+                {t("buttons.excelExport")}
+              </ExportButton>
+            </Box>
           }
         >
           <DataGrid
