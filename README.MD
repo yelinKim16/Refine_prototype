@@ -1,5 +1,8 @@
-#Refine prototype
-## I created a page that manages meal history and user addition using the Refine framework.
+##Refine prototype
+## React Framework 기반 Web 페이지
+### 식수관리 페이지 
+### 사용자 관리
+### 환경 설정
 
 <div align="center" style="margin: 30px;">
     <a href="https://refine.dev">
@@ -12,19 +15,11 @@ This [Refine](https://github.com/refinedev/refine) project was generated with [c
 
 
 
-
 ### Running the development server.
 
 ```bash
     npm run dev
 ```
-
-### Building for production.
-
-```bash
-    npm run build
-```
-
 ### Running the production server.
 
 ```bash
@@ -32,5 +27,3 @@ This [Refine](https://github.com/refinedev/refine) project was generated with [c
 ```
 
 
-
-MIT
