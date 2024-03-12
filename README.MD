@@ -1,4 +1,5 @@
-# huge-moose-chew
+#Refine prototype
+## I created a page that manages meal history and user addition using the Refine framework.
 
 <div align="center" style="margin: 30px;">
     <a href="https://refine.dev">
@@ -9,13 +10,8 @@
 
 This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
 
-## Getting Started
 
-A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
 
-Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
-
-## Available Scripts
 
 ### Running the development server.
 
@@ -35,15 +31,6 @@ Refine's hooks and components simplifies the development process and eliminates 
     npm run start
 ```
 
-## Learn More
 
-To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
-
-- **REST Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
-- **Material UI** [Docs](https://refine.dev/docs/ui-frameworks/mui/tutorial/)
-- **Inferencer** [Docs](https://refine.dev/docs/packages/documentation/inferencer)
-- **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
-
-## License
 
 MIT
