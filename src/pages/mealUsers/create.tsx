@@ -6,7 +6,6 @@ import {
 import { useForm } from "@refinedev/react-hook-form";
 import { Controller } from "react-hook-form";
 import { Create } from "@refinedev/mui";
-import InputMask from "react-input-mask";
 import { useApiUrl } from "@refinedev/core";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";

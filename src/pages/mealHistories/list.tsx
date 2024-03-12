@@ -81,7 +81,6 @@ export const MealHistoryList: React.FC = () => {
     paparseOptions: {
       skipEmptyLines: true,
     },
-
     onProgress: ({ totalAmount, processedAmount }) => {
       setImportProgress({
         processed: processedAmount,
@@ -102,14 +101,17 @@ export const MealHistoryList: React.FC = () => {
     },
     onFinish: (result) => {
       result.succeeded.forEach((item) => {
-        console.log(item);
         open?.({
-          message: `업로드 완료`,
+          message: `업로드 완료했습니다.`,
           type: "success",
         });
       });
+
       result.errored.forEach((item) => {
-        console.log(item);
+        const errorMessage = `업로드에 실패했습니다. \n사원 번호: ${item.request
+          .map((obj) => obj.empNo)
+          .join(", ")} \n해당하는 행에 오류가 발생했습니다.`;
+        alert(errorMessage);
       });
     },
   });
