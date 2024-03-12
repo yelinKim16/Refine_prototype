@@ -1,8 +1,8 @@
 
 # Refine prototype
-## _React Framework 기반 Web 페이지_
+## _Refine Framework 기반 Web 페이지_
 
-React Framework 기반으로 React Router, Material UI, typescript 사용하여 만든 Web 페이지 입니다. 
+Refine Framework 기반으로 React Router, Material UI, typescript 사용하여 만든 Web 페이지 입니다. 
 - 식수관리 페이지 
 - 사용자 관리
 - 환경 설정
